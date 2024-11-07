@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loki-internal-lb
+  namespace: grafana
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"  
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster
+  selector:
+    app: loki
+  ports:
+    - port: 80               
+      targetPort: 3100         
